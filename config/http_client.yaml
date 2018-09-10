@@ -1,0 +1,14 @@
+parameters: ~
+
+services:
+    GuzzleHttp\Client:
+        arguments: ['%web_api.http_client.config%']
+
+    WebApi\HttpClient\GuzzleHttpClient:
+        arguments: ['@GuzzleHttp\Client']
+
+    WebApi\HttpClient\HttpClientInterface: '@WebApi\HttpClient\GuzzleHttpClient'
+
+    WebApi\Context\Initializers\HttpClientAwareInitializer:
+        arguments: ['@WebApi\HttpClient\HttpClientInterface', '%web_api.http_client.config%']
+        tags: ['context.initializer']

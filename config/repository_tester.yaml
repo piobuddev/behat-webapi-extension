@@ -1,0 +1,32 @@
+parameters: ~
+
+services:
+    pdo:
+        class: \PDO
+        arguments:
+          - 'mysql:dbname=%DB_DATABASE%;host=%DB_HOST%'
+          - '%DB_USERNAME%'
+          - '%DB_PASSWORD%'
+
+    RepositoryTester\Repository\Database\Adapters\DbUnitConnectionAdapter:
+        arguments: ['@pdo']
+
+    RepositoryTester\Repository\Connection\ConnectionInterface: '@RepositoryTester\Repository\Database\Adapters\DbUnitConnectionAdapter'
+
+    WebApi\Context\Initializers\RepositoryAwareInitializer:
+        arguments: ['@RepositoryTester\Repository\Connection\ConnectionInterface']
+        tags: ['context.initializer']
+
+    Faker\Generator:
+        factory: ['Faker\Factory', create]
+
+    RepositoryTester\DataFactory\Definition\Container\ContainerInterface:
+        factory: ['WebApi\DataFactory\DefinitionContainerFactory', create]
+        arguments: ['%web_api.definitions.path%', 'definitions.php']
+
+    RepositoryTester\DataFactory\Factories\Faker\FakerDataFactory:
+        arguments: ['@Faker\Generator', '@RepositoryTester\DataFactory\Definition\Container\ContainerInterface']
+
+    WebApi\Context\Initializers\DataFactoryAwareInitializer:
+        arguments: ['@RepositoryTester\DataFactory\Factories\Faker\FakerDataFactory']
+        tags: ['context.initializer']
