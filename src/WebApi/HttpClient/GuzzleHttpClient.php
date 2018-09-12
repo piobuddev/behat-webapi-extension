@@ -14,9 +14,8 @@ class GuzzleHttpClient implements HttpClientInterface
 
     /**
      * @param \GuzzleHttp\Client $client
-     * @param array              $config
      */
-    public function __construct(Client $client, array $config = [])
+    public function __construct(Client $client)
     {
         $this->client = $client;
     }
@@ -26,7 +25,7 @@ class GuzzleHttpClient implements HttpClientInterface
      * @param string $url
      * @param array  $options
      *
-     * @return mixed
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function request(string $method, string $url, array $options = []): ResponseInterface
     {

@@ -97,13 +97,13 @@ class HttpClientContext implements HttpClientAwareContextInterface, RepositoryAw
     /**
      * @Then /^(?:the )JSON response should contain:$/
      *
-     * @param \Behat\Gherkin\Node\TableNode $expected
+     * @param \Behat\Gherkin\Node\TableNode $expectedTable
      */
     public function theResponseShouldContainJson(TableNode $expectedTable)
     {
         $body = (string)$this->response->getBody();
 
-        Assert::isTrue($this->isJson($body), 'Response is not in JSON format');
+        Assert::assertTrue($this->isJson($body), 'Response is not in JSON format');
 
         $expected = $this->parseValues($expectedTable->getHash());
         $expected = count($expected) === 1 ? array_pop($expected) : $expected;
@@ -121,12 +121,13 @@ class HttpClientContext implements HttpClientAwareContextInterface, RepositoryAw
     {
         $body = (string)$this->response->getBody();
 
-        Assert::isTrue($this->isJson($body), 'Response is not in JSON format');
+        Assert::assertTrue($this->isJson($body), 'Response is not in JSON format');
         Assert::assertEquals($expectedResponse, $body);
     }
 
     /**
      * @Then /^(?:the )?response should return (\d+) results$/
+     * @param string $amount
      */
     public function theResponseShouldReturnResults(string $amount)
     {

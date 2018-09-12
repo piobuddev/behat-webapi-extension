@@ -15,12 +15,18 @@ class HttpClientAwareInitializer implements ContextInitializer
     private $httpClient;
 
     /**
+     * @var array
+     */
+    private $config;
+
+    /**
      * @param \WebApi\HttpClient\HttpClientInterface $httpClient
      * @param array                                  $config
      */
     public function __construct(HttpClientInterface $httpClient, array $config)
     {
         $this->httpClient = $httpClient;
+        $this->config     = $config;
     }
 
     /**
