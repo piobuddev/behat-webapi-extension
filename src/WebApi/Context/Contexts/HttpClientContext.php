@@ -60,7 +60,7 @@ class HttpClientContext implements HttpClientAwareContextInterface, RepositoryAw
      * @param string $method
      * @param string $url
      */
-    public function iSendARequest(string $method, string $url)
+    public function iSendARequest(string $method, string $url): void
     {
         list($url, $queryString) = array_pad(explode('?', $url), 2, null);
         if ($queryString) {
@@ -73,10 +73,11 @@ class HttpClientContext implements HttpClientAwareContextInterface, RepositoryAw
     /**
      * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)":$/
      *
-     * @param string $method
-     * @param string $url
+     * @param string                        $method
+     * @param string                        $url
+     * @param \Behat\Gherkin\Node\TableNode $data
      */
-    public function iSend(string $method, string $url, TableNode $data)
+    public function iSend(string $method, string $url, TableNode $data): void
     {
         $this->options[RequestOptions::JSON] = $data->getHash()[0];
 
@@ -89,7 +90,7 @@ class HttpClientContext implements HttpClientAwareContextInterface, RepositoryAw
      *
      * @param string $code
      */
-    public function theResponseCodeShouldBe(string $code)
+    public function theResponseCodeShouldBe(string $code): void
     {
         Assert::assertEquals((int)$code, $this->response->getStatusCode());
     }
@@ -99,7 +100,7 @@ class HttpClientContext implements HttpClientAwareContextInterface, RepositoryAw
      *
      * @param \Behat\Gherkin\Node\TableNode $expectedTable
      */
-    public function theResponseShouldContainJson(TableNode $expectedTable)
+    public function theResponseShouldContainJson(TableNode $expectedTable): void
     {
         $body = (string)$this->response->getBody();
 
@@ -116,8 +117,10 @@ class HttpClientContext implements HttpClientAwareContextInterface, RepositoryAw
 
     /**
      * @Then /^(?:the )JSON response should be equal:$/
+     *
+     * @param \Behat\Gherkin\Node\PyStringNode $expectedResponse
      */
-    public function theResponseShouldBeEqual(PyStringNode $expectedResponse)
+    public function theResponseShouldBeEqual(PyStringNode $expectedResponse): void
     {
         $body = (string)$this->response->getBody();
 
@@ -129,7 +132,7 @@ class HttpClientContext implements HttpClientAwareContextInterface, RepositoryAw
      * @Then /^(?:the )?response should return (\d+) results$/
      * @param string $amount
      */
-    public function theResponseShouldReturnResults(string $amount)
+    public function theResponseShouldReturnResults(string $amount): void
     {
         Assert::assertCount((int)$amount, json_decode((string)$this->response->getBody()));
     }
@@ -139,7 +142,7 @@ class HttpClientContext implements HttpClientAwareContextInterface, RepositoryAw
      *
      * @param string $table
      */
-    public function responseShouldReturnExisting(string $table)
+    public function responseShouldReturnExisting(string $table): void
     {
         $response = json_decode((string)$this->response->getBody(), true);
         //todo: refactor

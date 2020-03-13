@@ -49,7 +49,7 @@ class RepositoryContext implements RepositoryAwareContextInterface, DataFactoryA
      * @param string                        $repository
      * @param \Behat\Gherkin\Node\TableNode $table
      */
-    public function entitiesExists(string $repository, TableNode $table)
+    public function entitiesExists(string $repository, TableNode $table): void
     {
         $data = $table->getHash();
 
@@ -62,7 +62,7 @@ class RepositoryContext implements RepositoryAwareContextInterface, DataFactoryA
      * @param string                        $repository
      * @param \Behat\Gherkin\Node\TableNode $table
      */
-    public function databaseContains(string $repository, TableNode $table)
+    public function databaseContains(string $repository, TableNode $table): void
     {
         $this->assertRepositoryHasRows($repository, $table->getHash());
     }
@@ -73,7 +73,7 @@ class RepositoryContext implements RepositoryAwareContextInterface, DataFactoryA
      * @param string                        $repository
      * @param \Behat\Gherkin\Node\TableNode $table
      */
-    public function databaseNotContains(string $repository, TableNode $table)
+    public function databaseNotContains(string $repository, TableNode $table): void
     {
         $this->assertRepositoryDoesNotHaveRow($repository, $table->getHash()[0]);
     }
@@ -90,7 +90,7 @@ class RepositoryContext implements RepositoryAwareContextInterface, DataFactoryA
     /**
      * @BeforeScenario @disableForeignKeys
      */
-    public function disableForeignKeys()
+    public function disableForeignKeys(): void
     {
         $this->traitDisableForeignKeys();
     }
@@ -98,7 +98,7 @@ class RepositoryContext implements RepositoryAwareContextInterface, DataFactoryA
     /**
      * @AfterScenario @disableForeignKeys
      */
-    public function enableForeignKeys()
+    public function enableForeignKeys(): void
     {
         $this->traitEnableForeignKeys();
     }

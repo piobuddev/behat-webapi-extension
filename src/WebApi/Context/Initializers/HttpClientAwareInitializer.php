@@ -34,7 +34,7 @@ class HttpClientAwareInitializer implements ContextInitializer
      *
      * @param Context $context
      */
-    public function initializeContext(Context $context)
+    public function initializeContext(Context $context): void
     {
         if ($context instanceof HttpClientAwareContextInterface) {
             $context->setClient($this->httpClient);

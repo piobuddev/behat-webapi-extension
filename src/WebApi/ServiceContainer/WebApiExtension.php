@@ -19,7 +19,7 @@ class WebApiExtension implements Extension
      *
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         return;
     }
@@ -29,7 +29,7 @@ class WebApiExtension implements Extension
      *
      * @return string
      */
-    public function getConfigKey()
+    public function getConfigKey(): string
     {
         return 'web_api';
     }
@@ -44,7 +44,7 @@ class WebApiExtension implements Extension
      *
      * @param ExtensionManager $extensionManager
      */
-    public function initialize(ExtensionManager $extensionManager)
+    public function initialize(ExtensionManager $extensionManager): void
     {
         return;
     }
@@ -54,7 +54,7 @@ class WebApiExtension implements Extension
      *
      * @param ArrayNodeDefinition $builder
      */
-    public function configure(ArrayNodeDefinition $builder)
+    public function configure(ArrayNodeDefinition $builder): void
     {
         $builder
             ->addDefaultsIfNotSet()
@@ -92,8 +92,10 @@ class WebApiExtension implements Extension
      *
      * @param ContainerBuilder $container
      * @param array            $config
+     *
+     * @throws \Exception
      */
-    public function load(ContainerBuilder $container, array $config)
+    public function load(ContainerBuilder $container, array $config): void
     {
         $basePath       = $container->getParameter('paths.base');
         $definitionPath = $basePath . '/' . $config['repository_tester']['definitions_path'];

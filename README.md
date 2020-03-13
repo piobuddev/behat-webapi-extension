@@ -1,4 +1,4 @@
-# Repository Tester
+# Behat WEBAPI extension
 
 Web Api extension for Behat helps with performing http requests and interacting with a database.
 
