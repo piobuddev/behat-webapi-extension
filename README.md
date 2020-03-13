@@ -113,7 +113,6 @@ $ vendor/bin/phpcbf --standard=PSR2 --extensions=php --colors --severity=1 src
 ## Code Style
 * [PSR2](https://www.php-fig.org/psr/psr-2/)
 
-
 ## Contributing
 
 Please read [CONTRIBUTING.md](https://gist.github.com/piobuddev/c04b7341f68da9718907cb593012d746) for details on my code of conduct, and the process for submitting pull requests to me.
@@ -128,4 +127,4 @@ I use [SemVer](http://semver.org/) for versioning. For the versions available, s
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/piobuddev/repository-tester/blob/master/LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/piobuddev/behat-webapi-extension/blob/master/LICENSE.md) file for details
